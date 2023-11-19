@@ -6,6 +6,7 @@ import com.aoyu.software_library.service.UserService;
 import com.aoyu.software_library.utils.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 /**
  * @BelongsProject: software_library
@@ -32,5 +33,12 @@ public class UserServiceImpl implements UserService {
         String hashPassword = HashUtil.hashPassword(password);
         //add user
         userMapper.addUser(username,hashPassword);
+    }
+
+    @Override
+    public void update(User user) {
+        //设置用户信息更新时间
+        user.setUpdateTime(LocalDateTime.now());
+        userMapper.update(user);
     }
 }

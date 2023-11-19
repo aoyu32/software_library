@@ -8,4 +8,7 @@ public interface UserService {
 
     //register user
     void register(String username,String password);
+
+    //update user information
+    void update(User user);
 }

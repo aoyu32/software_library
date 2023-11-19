@@ -3,7 +3,7 @@ package com.aoyu.software_library.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @BelongsProject: software_library
@@ -23,6 +23,6 @@ public class User {
     private String nickname;
     private String email;
     private String userPic;
-    private LocalDate createTime;
-    private LocalDate updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }
