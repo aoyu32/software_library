@@ -103,7 +103,7 @@ public class UserController {
     //更新用户信息
     @Operation(summary = "更新信息")
     @PutMapping("/update")
-    public Result updateUserInfo(@RequestBody User user){
+    public Result updateUserInfo(@RequestBody @Validated User user){
         //调用service层方法
         userService.update(user);
         return Result.success();
