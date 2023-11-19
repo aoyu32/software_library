@@ -3,12 +3,15 @@ package com.aoyu.software_library.service;
 import com.aoyu.software_library.pojo.User;
 
 public interface UserService {
-    //query user
+    //根据用户名查询用户
     User findByUsername(String username);
 
-    //register user
+    //注册用户
     void register(String username,String password);
 
-    //update user information
+    //更新用户信息
     void update(User user);
+
+    //更新用户头像
+    void updateAvatar(String avatarUrl);
 }

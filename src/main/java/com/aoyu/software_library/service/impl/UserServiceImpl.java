@@ -4,9 +4,11 @@ import com.aoyu.software_library.mapper.UserMapper;
 import com.aoyu.software_library.pojo.User;
 import com.aoyu.software_library.service.UserService;
 import com.aoyu.software_library.utils.HashUtil;
+import com.aoyu.software_library.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * @BelongsProject: software_library
@@ -22,11 +24,22 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    /**
+     * 根据用户名查询用户
+     * @param username 用户名
+     * @return User对象
+     */
     @Override
     public User findByUsername(String username) {
         return userMapper.findByUsername(username);
     }
 
+    /**
+     * 用户注册
+     * @param username 用户名
+     * @param password 登录密码
+     */
     @Override
     public void register(String username,String password) {
         //password encryption
@@ -35,10 +48,26 @@ public class UserServiceImpl implements UserService {
         userMapper.addUser(username,hashPassword);
     }
 
+
+    /**
+     * 更新用户信息
+     * @param user 携带更新信息的实体类
+     */
     @Override
     public void update(User user) {
         //设置用户信息更新时间
         user.setUpdateTime(LocalDateTime.now());
         userMapper.update(user);
+    }
+
+    /**
+     * 更新用户头像
+     * @param avatarUrl 头像url
+     */
+    @Override
+    public void updateAvatar(String avatarUrl) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updateAvatar(avatarUrl,id);
     }
 }
