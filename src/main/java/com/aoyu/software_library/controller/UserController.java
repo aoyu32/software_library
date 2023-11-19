@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,7 +81,7 @@ public class UserController {
         return Result.error("密码错误!");
     }
 
-    //用户信息
+    //获取用户信息
     @Operation(summary = "用户信息")
     @GetMapping("/userinfo")
     public Result<User> userInfo(){
@@ -118,5 +119,42 @@ public class UserController {
         return Result.success();
     }
 
+    //更新密码
+    @Operation(summary = "更新密码")
+    @PatchMapping("/updatepwd")
+    public Result updatePwd(@RequestBody Map<String,String> params) {
+        //校验参数
+        String oldPwd = params.get("old_pwd");
+        String newPwd = params.get("new_pwd");
+        String rePwd = params.get("re_pwd");
+
+        //判断三个密码是否都不为空
+        if (!StringUtils.hasLength(oldPwd) || !StringUtils.hasLength(newPwd) || !StringUtils.hasLength(rePwd)) {
+            return Result.error("缺少必要参数!");
+        }
+
+        //原密码是否正确
+        //查询原密码
+        //从ThreadLocal里获取用户名
+        Map<String,Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
+        //根据用户名查询用户
+        User user = userService.findByUsername(username);
+        boolean isRight = HashUtil.verifyPassword(oldPwd, user.getPassword());
+        if (!isRight){
+            return Result.error("原密码错误!");
+        }
+
+        //判断新密码和rePwd是否一样
+        if (!newPwd.equals(rePwd)){
+            return Result.error("两次填写的密码不一致!");
+        }
+
+        //调用service完成密码更新
+        userService.updatePwd(newPwd);
+        return Result.success("密码已更新!");
+
+
+    }
 
 }

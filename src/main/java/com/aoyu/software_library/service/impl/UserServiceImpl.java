@@ -70,4 +70,15 @@ public class UserServiceImpl implements UserService {
         Integer id = (Integer) map.get("id");
         userMapper.updateAvatar(avatarUrl,id);
     }
+
+    /**
+     * 更新用户登录密码
+     * @param newPwd 新密码
+     */
+    @Override
+    public void updatePwd(String newPwd) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updatePwd(HashUtil.hashPassword(newPwd),id);
+    }
 }
