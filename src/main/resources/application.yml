@@ -1,4 +1,4 @@
-#configue mybatis
+#数据源配置
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -6,7 +6,7 @@ spring:
     username: root
     password: 83216
 
-#knife4j swagger
+#knife4j swagger接口文档配置
 # springdoc-openapi项目配置
 springdoc:
   swagger-ui:
@@ -24,3 +24,8 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
+
+#开启驼峰命名和下划线命名的自动转换
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

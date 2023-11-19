@@ -1,5 +1,6 @@
 package com.aoyu.software_library.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 public class User {
     private Integer id;
     private String username;
+    @JsonIgnore//让springmvc把当前对象转换成json字符串时忽略password,最终的json字符串就没有password属性了
     private String password;
     private String nickname;
     private String email;

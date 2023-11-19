@@ -1,10 +1,13 @@
 package com.aoyu.software_library.interceptors;
 
 import com.aoyu.software_library.utils.JwtTokenUtil;
+import com.aoyu.software_library.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import java.util.Map;
 
 /**
  * @BelongsProject: software_library
@@ -26,7 +29,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         try {
             //验证token
-            JwtTokenUtil.decodeToken(token);
+            Map<String, Object> claims = JwtTokenUtil.decodeToken(token);
+
+            //把业务数据存储到ThreadLocal中
+            ThreadLocalUtil.set(claims);
+
             //放行
             return true;
         }catch (Exception e){
@@ -35,5 +42,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             //不放行
             return false;
         }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        //清空ThreadLocal里的数据
+        ThreadLocalUtil.clear();
     }
 }

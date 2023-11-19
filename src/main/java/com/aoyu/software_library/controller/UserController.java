@@ -5,14 +5,13 @@ import com.aoyu.software_library.pojo.User;
 import com.aoyu.software_library.service.UserService;
 import com.aoyu.software_library.utils.HashUtil;
 import com.aoyu.software_library.utils.JwtTokenUtil;
+import com.aoyu.software_library.utils.ThreadLocalUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,5 +80,24 @@ public class UserController {
     }
 
     //用户信息
+    @Operation(summary = "用户信息")
+    @GetMapping("/userinfo")
+    public Result<User> userInfo(){
+        //根据用户名查询用户
+        //1.获取token中携带的username信息
+//        Map<String, Object> map = JwtTokenUtil.decodeToken(token);
+//        String username = (String) map.get("username");
+
+        //1.使用ThreadLocal里存储的值
+        Map<String,Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
+
+        //2.使用username查询用户
+        User user = userService.findByUsername(username);
+
+        //响应数据
+        return Result.success(user);
+
+    }
 
 }
