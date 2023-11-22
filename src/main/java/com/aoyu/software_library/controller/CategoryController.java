@@ -30,7 +30,7 @@ public class CategoryController {
     //新增软件分类
     @Operation(summary = "添加分类")
     @PostMapping("/add")
-    public Result add(@RequestBody @Validated Category category){
+    public Result add(@RequestBody @Validated(Category.Add.class) Category category){
         categoryService.add(category);
         return Result.success();
     }
@@ -51,6 +51,13 @@ public class CategoryController {
         return Result.success(c);
     }
 
+    //更新分类
+    @Operation(summary = "更新分类")
+    @PutMapping("/update")
+    public Result update(@RequestBody @Validated(Category.Update.class) Category category){
+        categoryService.update(category);
+        return Result.success();
+    }
 
 
 

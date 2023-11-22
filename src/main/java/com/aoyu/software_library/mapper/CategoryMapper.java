@@ -4,6 +4,7 @@ import com.aoyu.software_library.pojo.Category;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -15,11 +16,15 @@ public interface CategoryMapper {
             "value(#{categoryName},#{categoryAlias},#{createUser},#{createTime},#{updateTime})")
     void add(Category category);
 
-    //根据createUserId查询所有分类
+    //根据createUserId查询所有软件分类
     @Select("select * from category where create_user=#{userId}")
     List<Category> list(Integer userId);
 
-    //根据分类id查询分类详情
+    //根据分类id查询软件分类详情
     @Select("select * from category where id=#{id}")
     Category findById(Integer id);
+
+    //更新软件分类信息
+    @Update("update category set category_name=#{categoryName},category_alias=#{categoryAlias},update_time=#{updateTime} where id=#{id}")
+    void update(Category category);
 }

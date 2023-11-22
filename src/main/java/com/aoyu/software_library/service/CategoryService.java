@@ -9,9 +9,12 @@ public interface CategoryService {
     //添加软件分类
     void add(Category category);
 
-    //查询所有分类列表
+    //查询所有软件分类列表
     List<Category> list();
 
-    //根据分类id查询分类详情
+    //根据分类id查询软件分类详情
     Category findById(Integer id);
+
+    //更新软件分类
+    void update(Category category);
 }

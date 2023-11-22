@@ -61,5 +61,14 @@ public class CategoryServiceImpl implements CategoryService {
          return categoryMapper.findById(id);
     }
 
+    //更新软件分类
+    @Override
+    public void update(Category category) {
+        //设置更新时间
+        category.setUpdateTime(LocalDateTime.now());
+        //更新信息
+        categoryMapper.update(category);
+    }
+
 
 }
