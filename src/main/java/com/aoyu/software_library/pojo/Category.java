@@ -1,5 +1,6 @@
 package com.aoyu.software_library.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -23,6 +24,8 @@ public class Category {
     @NotEmpty//设置参数不能为null
     private String categoryAlias;
     private Integer createUserId;
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private LocalDateTime createTime;
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private LocalDateTime updateTime;
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +38,19 @@ public class CategoryServiceImpl implements CategoryService {
         //设置更新时间
         category.setUpdateTime(LocalDateTime.now());
         categoryMapper.add(category);
+    }
+
+    @Override
+    public List<Category> list() {
+
+        //通过createUserId查询该用户下的所有分类
+        //获取用户id
+        Map<String ,Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+
+        //根据id查询分类
+        return categoryMapper.list(id);
+
     }
 
     //添加软件分类

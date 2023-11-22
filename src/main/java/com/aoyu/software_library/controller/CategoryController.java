@@ -2,15 +2,13 @@ package com.aoyu.software_library.controller;
 
 import com.aoyu.software_library.pojo.Category;
 import com.aoyu.software_library.pojo.Result;
-import com.aoyu.software_library.service.CategoryService;
 import com.aoyu.software_library.service.impl.CategoryServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @BelongsProject: software_library
@@ -36,5 +34,14 @@ public class CategoryController {
         categoryService.add(category);
         return Result.success();
     }
+
+    //查询分类列表
+    @Operation(summary = "分类列表")
+    @GetMapping("/list")
+    public Result<List<Category>> list(){
+        List<Category> list = categoryService.list();
+        return Result.success(list);
+    }
+
 
 }
