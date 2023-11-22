@@ -26,13 +26,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    //添加分类
     @Override
     public void add(Category category) {
         //封装category数据
         //设置创建用户id
         Map<String,Object> map = ThreadLocalUtil.get();
         Integer id = (Integer) map.get("id");
-        category.setCreateUserId(id);
+        category.setCreateUser(id);
         //设置创建时间
         category.setCreateTime(LocalDateTime.now());
         //设置更新时间
@@ -40,6 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.add(category);
     }
 
+    //查询所有分类
     @Override
     public List<Category> list() {
 
@@ -53,6 +55,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
-    //添加软件分类
+    //根据id查询分类详情
+    @Override
+    public Category findById(Integer id) {
+         return categoryMapper.findById(id);
+    }
+
 
 }

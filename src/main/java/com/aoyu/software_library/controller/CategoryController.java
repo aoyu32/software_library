@@ -43,5 +43,15 @@ public class CategoryController {
         return Result.success(list);
     }
 
+    //查询分类详情
+    @Operation(summary = "分类详情")
+    @GetMapping("/detail")
+    public Result<Category> detail(Integer id) {
+        Category c = categoryService.findById(id);
+        return Result.success(c);
+    }
+
+
+
 
 }

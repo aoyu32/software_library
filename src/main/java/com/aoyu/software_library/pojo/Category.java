@@ -23,7 +23,7 @@ public class Category {
     private String categoryName;
     @NotEmpty//设置参数不能为null
     private String categoryAlias;
-    private Integer createUserId;
+    private Integer createUser;
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private LocalDateTime createTime;
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
