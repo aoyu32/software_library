@@ -149,12 +149,14 @@ public class UserController {
         if (!newPwd.equals(rePwd)){
             return Result.error("两次填写的密码不一致!");
         }
-
         //调用service完成密码更新
         userService.updatePwd(newPwd);
         return Result.success("密码已更新!");
-
-
     }
+
+
+
+
+
 
 }

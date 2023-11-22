@@ -1,7 +1,8 @@
 package com.aoyu.software_library.pojo;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -17,9 +18,11 @@ import java.time.LocalDate;
 public class Category {
 
     private Integer id;
+    @NotEmpty//设置参数不能为null
     private String categoryName;
+    @NotEmpty//设置参数不能为null
     private String categoryAlias;
     private Integer createUserId;
-    private LocalDate createTime;
-    private LocalDate updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }

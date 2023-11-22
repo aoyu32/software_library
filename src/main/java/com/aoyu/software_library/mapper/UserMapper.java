@@ -17,7 +17,7 @@ public interface UserMapper {
     void addUser(String username, String password);
 
     //更新用户信息
-    @Update("update user set nickname=#{nickname},email=#{email},update_time=#{updateTime} where id=#{id}")
+    @Update("update user set username=#{username}, nickname=#{nickname},email=#{email},update_time=#{updateTime} where id=#{id}")
     void update(User user);
 
     //更新用户头像
