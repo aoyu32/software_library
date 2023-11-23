@@ -8,7 +8,7 @@ import java.util.List;
  * @BelongsPackage: com.aoyu.software_library.utils
  * @Author: AoYu
  * @CreateTime: 2023-11-23  18:04
- * @Description: TODO
+ * @Description: 参数校验规则工具类
  * @Version: 1.0
  */
 
