@@ -1,8 +1,12 @@
 package com.aoyu.software_library.pojo;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @BelongsProject: software_library
@@ -16,12 +20,28 @@ import java.util.Date;
 @Data
 public class Software {
     private Integer id;
-    private String sname;
+    @NotEmpty
+    @Pattern(regexp = "^\\S{1,15}$")//参数校验
+    private String name;
+    @NotEmpty
+    @Pattern(regexp = "^\\d+(KB|MB)$")
     private String size;
+    @NotEmpty
+    @Pattern(regexp = "^\\d+(\\.\\d+)+$")
     private String version;
+    @NotEmpty
     private String description;
+    @NotEmpty
+    @URL
     private String icon;
-    private Date addTime;
-    private Date updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    @NotNull
     private Integer categoryId;
+    @NotEmpty
+    @Pattern(regexp = "^(未破解|已破解|免费)$")
+    private String status;
+    @NotEmpty
+    @URL
+    private String downloadUrl;
 }
