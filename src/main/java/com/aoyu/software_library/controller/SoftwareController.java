@@ -32,7 +32,9 @@ public class SoftwareController {
     public Result add(@RequestBody @Validated Software software){
         softwareService.add(software);
         return Result.success();
-
     }
+
+    //查询软件
+
 
 }
