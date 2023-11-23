@@ -4,6 +4,7 @@ import com.aoyu.software_library.pojo.Category;
 import com.aoyu.software_library.pojo.Result;
 import com.aoyu.software_library.service.impl.CategoryServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 
 
+@Tag(name = "软件分类")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
@@ -56,6 +58,14 @@ public class CategoryController {
     @PutMapping("/update")
     public Result update(@RequestBody @Validated(Category.Update.class) Category category){
         categoryService.update(category);
+        return Result.success();
+    }
+
+    //删除分类
+    @Operation(summary = "删除分类")
+    @GetMapping("/delete")
+    public Result delete(Integer id){
+        categoryService.delete(id);
         return Result.success();
     }
 
