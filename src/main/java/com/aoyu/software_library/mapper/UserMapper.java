@@ -1,10 +1,7 @@
 package com.aoyu.software_library.mapper;
 
 import com.aoyu.software_library.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -27,4 +24,7 @@ public interface UserMapper {
     //更新用户密码
     @Update("update user set password=#{newPwd},update_time=now() where id=#{id}")
     void updatePwd(String newPwd, Integer id);
+
+    @Delete("delete from user where id=#{id}")
+    void delete(Integer id);
 }

@@ -85,11 +85,6 @@ public class UserController {
     @Operation(summary = "用户信息")
     @GetMapping("/userinfo")
     public Result<User> userInfo(){
-        //根据用户名查询用户
-        //1.获取token中携带的username信息
-//        Map<String, Object> map = JwtTokenUtil.decodeToken(token);
-//        String username = (String) map.get("username");
-
         //1.使用ThreadLocal里存储的值
         Map<String,Object> map = ThreadLocalUtil.get();
         String username = (String) map.get("username");
@@ -154,6 +149,14 @@ public class UserController {
         return Result.success("密码已更新!");
     }
 
+
+    //删除用户
+    @Operation(summary = "删除用户")
+    @DeleteMapping("/delete")
+    public Result delete(Integer id){
+        userService.delete(id);
+        return Result.success();
+    }
 
 
 

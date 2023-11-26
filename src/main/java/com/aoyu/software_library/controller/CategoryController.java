@@ -63,7 +63,7 @@ public class CategoryController {
 
     //删除分类
     @Operation(summary = "删除分类")
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public Result delete(Integer id){
         categoryService.delete(id);
         return Result.success();

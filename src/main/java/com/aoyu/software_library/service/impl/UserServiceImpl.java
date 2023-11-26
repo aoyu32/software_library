@@ -81,4 +81,9 @@ public class UserServiceImpl implements UserService {
         Integer id = (Integer) map.get("id");
         userMapper.updatePwd(HashUtil.hashPassword(newPwd),id);
     }
+
+    @Override
+    public void delete(Integer id) {
+        userMapper.delete(id);
+    }
 }

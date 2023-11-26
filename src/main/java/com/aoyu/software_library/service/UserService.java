@@ -17,4 +17,7 @@ public interface UserService {
 
     //更新密码
     void updatePwd(String newPwd);
+
+    //删除用户
+    void delete(Integer id);
 }

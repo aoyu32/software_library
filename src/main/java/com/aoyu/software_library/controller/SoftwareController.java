@@ -1,5 +1,6 @@
 package com.aoyu.software_library.controller;
 
+import com.aoyu.software_library.pojo.PageBean;
 import com.aoyu.software_library.pojo.Result;
 import com.aoyu.software_library.pojo.Software;
 import com.aoyu.software_library.service.impl.SoftwareServiceImpl;
@@ -34,7 +35,24 @@ public class SoftwareController {
         return Result.success();
     }
 
-    //查询软件
+    //分页条件查询软件
+    @Operation(summary = "分页查询软件")
+    @GetMapping("/query")
+    public Result<PageBean<Software>> query(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) String status
+    ){
+        //查询对应参数的软件
+        PageBean<Software> softwareList = softwareService.query(pageNum,pageSize,name,categoryId,status);
+
+        return Result.success(softwareList);
+    }
+
+
+
 
 
 }

@@ -5,6 +5,8 @@ import com.aoyu.software_library.pojo.Software;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SoftwareMapper {
 
@@ -13,4 +15,7 @@ public interface SoftwareMapper {
     @Insert("insert into software(name,size,version,description,icon,create_time,update_time,category_id,status,download_url)" +
             "value(#{name},#{size},#{version},#{description},#{icon},#{createTime},#{updateTime},#{categoryId},#{status},#{downloadUrl})")
     void add(Software software);
+
+    //条件查询软件
+    List<Software> query(String name, Integer categoryId, String status);
 }
