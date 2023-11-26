@@ -27,17 +27,4 @@ public class HashUtil {
         // 使用哈希密码进行验证
         return BCrypt.checkpw(plainTextPassword, hashedPassword);
     }
-
-//    public static void main(String[] args) {
-//        // 示例用法
-//        String originalPassword = "myPassword123";
-//
-//        // 加密密码
-//        String hashedPassword = hashPassword(originalPassword);
-//        System.out.println("Hashed Password: " + hashedPassword);
-//
-//        // 验证密码
-//        boolean isPasswordCorrect = verifyPassword(originalPassword, hashedPassword);
-//        System.out.println("Is Password Correct: " + isPasswordCorrect);
-//    }
 }
