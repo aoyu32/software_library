@@ -26,8 +26,8 @@ import java.io.InputStream;
 public class AliOssUtil {
 
     private static final String ENDPOINT = "https://oss-cn-beijing.aliyuncs.com";
-    private static final String ACCESS_KEY_ID = "LTAI5tS9C84o88u6RdWKNF1N";
-    private static final String ACCESS_KEY_SECRET = "E30wcAd97GFc40w9MdmEkUhgjKL8oA";
+    private static final String ACCESS_KEY_ID = "";
+    private static final String ACCESS_KEY_SECRET = "";
     private static final String BUCKET_NAME = "software-library";
     public static String uploadFile(String objectName, InputStream inputStream) throws Exception {
 

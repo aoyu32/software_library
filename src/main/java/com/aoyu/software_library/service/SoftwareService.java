@@ -12,4 +12,7 @@ public interface SoftwareService {
 
     //修改软件信息
     void update(Software software);
+
+    //删除软件
+    void delete(Integer id);
 }

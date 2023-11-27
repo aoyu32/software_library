@@ -33,4 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 
-com/aoyu/software_library/utils/AliOssUtil.java
+#src/com/aoyu/software_library/utils/AliOssUtil.java

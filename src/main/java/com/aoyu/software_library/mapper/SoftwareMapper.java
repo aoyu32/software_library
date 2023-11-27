@@ -2,6 +2,7 @@ package com.aoyu.software_library.mapper;
 
 
 import com.aoyu.software_library.pojo.Software;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,4 +22,8 @@ public interface SoftwareMapper {
 
     //条件更新软件信息
     void update(Software software);
+
+    //删除软件
+    @Delete("delete from software where id=#{id}")
+    void delete(Integer id);
 }

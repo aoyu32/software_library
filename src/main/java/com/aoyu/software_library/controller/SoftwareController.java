@@ -59,5 +59,12 @@ public class SoftwareController {
         return Result.success();
     }
 
+    //删除软件
+    @Operation(summary = "删除软件")
+    @DeleteMapping("/delete")
+    public Result delete(Integer id){
+        softwareService.delete(id);
+        return Result.success();
+    }
 
 }

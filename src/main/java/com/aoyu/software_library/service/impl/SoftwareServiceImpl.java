@@ -70,4 +70,10 @@ public class SoftwareServiceImpl implements SoftwareService {
         softwareMapper.update(software);
 
     }
+
+    //删除软件
+    @Override
+    public void delete(Integer id) {
+        softwareMapper.delete(id);
+    }
 }
