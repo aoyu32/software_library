@@ -5,6 +5,11 @@ spring:
     url: jdbc:mysql://localhost:3306/software_library
     username: root
     password: 83216
+  #redis配置
+  data:
+    redis:
+      host:localhost
+      port:6379
 
 #knife4j swagger接口文档配置
 # springdoc-openapi项目配置
@@ -29,3 +34,5 @@ knife4j:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+

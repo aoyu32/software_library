@@ -2,8 +2,6 @@ package com.aoyu.software_library.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-
 import java.util.Date;
 import java.util.Map;
 
@@ -18,7 +16,7 @@ import java.util.Map;
 
 public class JwtTokenUtil {
     private static final String SECRET_KEY = "aoyu546413482488"; // 用于签名的密钥
-    private static final long EXPIRATION_TIME = 86400000; // 过期时间，单位：毫秒（这里是一天）
+    private static final long EXPIRATION_TIME = 86400000*7; // 过期时间，单位：毫秒（这里是一天）
 
     public static String generateToken( Map<String, Object> claims) {
         Date now = new Date();

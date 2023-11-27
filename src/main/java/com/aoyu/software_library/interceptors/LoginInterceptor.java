@@ -4,6 +4,9 @@ import com.aoyu.software_library.utils.JwtTokenUtil;
 import com.aoyu.software_library.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -21,6 +24,9 @@ import java.util.Map;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -28,6 +34,14 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
 
         try {
+            //从redis中获取token
+            ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+            String redisToken = operations.get(token);
+            //如果token获取不到则抛出异常
+            if (redisToken==null){
+                throw new RuntimeException();
+            }
+
             //验证token
             Map<String, Object> claims = JwtTokenUtil.decodeToken(token);
 

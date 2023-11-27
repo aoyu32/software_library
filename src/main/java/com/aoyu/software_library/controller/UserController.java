@@ -11,12 +11,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @BelongsProject: software_library
@@ -33,7 +36,9 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     //用户注册接口
     @Operation(summary = "用户注册")
@@ -75,6 +80,11 @@ public class UserController {
 
             //生成token
             String token = JwtTokenUtil.generateToken(claims);
+
+            //把token存储到redis中
+            ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
+            operations.set(token,token,7, TimeUnit.DAYS);
+
             return Result.success(token);
         }
 
@@ -117,7 +127,7 @@ public class UserController {
     //更新密码
     @Operation(summary = "更新密码")
     @PatchMapping("/updatepwd")
-    public Result updatePwd(@RequestBody Map<String,String> params) {
+    public Result updatePwd(@RequestBody Map<String,String> params,@RequestHeader(value = "Authorization") String token) {
         //校验参数
         String oldPwd = params.get("old_pwd");
         String newPwd = params.get("new_pwd");
@@ -146,6 +156,11 @@ public class UserController {
         }
         //调用service完成密码更新
         userService.updatePwd(newPwd);
+
+        //更新密码后删除未修改密码前存储在redis中的token
+        ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+        operations.getOperations().delete(token);
+
         return Result.success("密码已更新!");
     }
 
