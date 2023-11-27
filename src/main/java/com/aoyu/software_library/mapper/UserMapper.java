@@ -25,6 +25,7 @@ public interface UserMapper {
     @Update("update user set password=#{newPwd},update_time=now() where id=#{id}")
     void updatePwd(String newPwd, Integer id);
 
+    //删除用户
     @Delete("delete from user where id=#{id}")
     void delete(Integer id);
 }

@@ -51,8 +51,13 @@ public class SoftwareController {
         return Result.success(softwareList);
     }
 
-
-
+    //修改软件信息
+    @Operation(summary = "修改文件信息")
+    @PutMapping("/update")
+    public Result update(@RequestBody @Validated(Software.Update.class)  Software software){
+        softwareService.update(software);
+        return Result.success();
+    }
 
 
 }

@@ -18,4 +18,7 @@ public interface SoftwareMapper {
 
     //条件查询软件
     List<Software> query(String name, Integer categoryId, String status);
+
+    //条件更新软件信息
+    void update(Software software);
 }

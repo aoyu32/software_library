@@ -60,4 +60,14 @@ public class SoftwareServiceImpl implements SoftwareService {
 
         return pageBean;
     }
+
+    //修改软件信息
+    @Override
+    public void update(Software software) {
+
+        //设置更新时间
+        software.setUpdateTime(LocalDateTime.now());
+        softwareMapper.update(software);
+
+    }
 }

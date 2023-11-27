@@ -10,4 +10,6 @@ public interface SoftwareService {
     //条件分页查询软件
     PageBean<Software> query(Integer pageNum, Integer pageSize, String name, Integer categoryId, String status);
 
+    //修改软件信息
+    void update(Software software);
 }
